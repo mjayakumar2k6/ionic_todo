@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      ToDo
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,43 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">ToDo</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-grid>
+    <ion-button (click)="capture()">Camera</ion-button>
+    <ion-row>
+        <ion-col size-sm="6" size-md="4">
+        <ion-card>
+          <ion-icon color="primary" size="large" name="newspaper-outline"></ion-icon>
+          <ion-card-header>
+            <ion-card-title>All</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+            {{allDataCount}} Tasks
+          </ion-card-content>
+        </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="4"  *ngFor="let todo of todoKeys" [routerLink] = "[todo]">
+        <ion-card>
+          <ion-icon size="large" [color]="getColor(todo)" [name]="getIcon(todo)"></ion-icon>
+          <ion-card-header>
+            <ion-card-title>{{todo}}</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+            {{getCount(todo)}} Tasks
+          </ion-card-content>
+        </ion-card>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['create']">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
